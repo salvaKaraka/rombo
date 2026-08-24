@@ -31,6 +31,8 @@ ahí, regla por regla, junto con el manual de usuario.
 
 ## Cómo se usa
 
+Necesitás **Node 22 o superior**.
+
 ```bash
 npm install
 npm run dev          # abre http://localhost:5173

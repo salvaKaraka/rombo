@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Modelado de bases de datos: del enunciado al esquema fisico, paso a paso. Reimplementacion web de CasER 2.0 (UNLP).",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

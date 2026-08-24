@@ -62,6 +62,9 @@ que mute el modelo en su lugar, rompés el deshacer.
 
 ## Antes de mandar el PR
 
+Hace falta **Node 22 o superior** (en Node 20 los tests no arrancan: `jsdom`
+arrastra un `undici` que necesita una API que ahí no existe).
+
 ```bash
 npm install
 npm test              # 42 tests

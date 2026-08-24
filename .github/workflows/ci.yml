@@ -9,12 +9,21 @@ jobs:
   verificar:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        # jsdom 30 arrastra un undici que necesita `webidl.util.markAsUncloneable`,
+        # ausente en Node 20. De ahí el mínimo de 22.
+        node: [22, 24]
+
+    name: verificar (node ${{ matrix.node }})
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node }}
           cache: npm
 
       - name: Instalar dependencias
