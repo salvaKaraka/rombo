@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Modelos guardados desde la app
+*.caser.json
+
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,41 @@
+name: Bug
+description: Algo se rompe, se dibuja mal o no responde
+labels: [bug]
+body:
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Cómo reproducirlo
+      placeholder: |
+        1. Crear una entidad "persona"
+        2. Agregarle un atributo compuesto
+        3. …
+    validations:
+      required: true
+
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Qué esperabas que pasara
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Qué pasó
+      description: Si hay un error en la consola del navegador, pegalo acá.
+    validations:
+      required: true
+
+  - type: textarea
+    id: modelo
+    attributes:
+      label: Modelo con el que pasa
+      description: Contenido del `.caser.json`, o el archivo adjunto. Opcional pero ayuda mucho.
+
+  - type: input
+    id: entorno
+    attributes:
+      label: Navegador y sistema
+      placeholder: Chrome 130 en macOS 15

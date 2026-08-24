@@ -1,0 +1,51 @@
+name: Regla de modelado
+description: La herramienta transforma el modelo distinto de como lo hace el CasER original
+labels: [regla-de-modelado]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Este es el tipo de issue más valioso del proyecto: el objetivo es
+        comportarse igual que la herramienta de la cátedra, así que cualquier
+        divergencia es un bug.
+
+  - type: dropdown
+    id: paso
+    attributes:
+      label: ¿En qué paso pasa?
+      options:
+        - Modelo conceptual (edición, notación)
+        - Pasaje a lógico — atributos compuestos
+        - Pasaje a lógico — atributos polivalentes
+        - Pasaje a lógico — jerarquías
+        - Pasaje a físico — identificadores externos
+        - Pasaje a físico — paso a tablas
+        - Otro
+    validations:
+      required: true
+
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Qué hace el CasER original
+      description: Y de dónde lo sacás — figura del manual, o clase y método del fuente Java.
+      placeholder: |
+        Ej.: con cobertura Parcial no debería ofrecer la opción C.
+        Fuente: Entidad.decideJerarquia(), rama cobertura.isPE() || isPS().
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Qué hace esta versión
+    validations:
+      required: true
+
+  - type: textarea
+    id: modelo
+    attributes:
+      label: Modelo con el que se reproduce
+      description: >
+        Pegá acá el contenido del `.caser.json` (botón Guardar), o adjuntá el
+        archivo arrastrándolo. Es lo que hace el problema reproducible.
