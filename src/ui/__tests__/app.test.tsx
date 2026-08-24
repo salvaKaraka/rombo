@@ -9,7 +9,12 @@ import { render, screen, within, cleanup, fireEvent } from '@testing-library/rea
 import userEvent from '@testing-library/user-event'
 import { App } from '../App'
 
-beforeEach(() => cleanup())
+beforeEach(() => {
+  cleanup()
+  // El aviso de bienvenida recuerda que se cerró: sin limpiarlo, el primer test
+  // que lo cierra cambia lo que ven los siguientes.
+  localStorage.clear()
+})
 
 /** Abre un dialogo desde la barra de herramientas por su etiqueta accesible. */
 async function toolbar(u: ReturnType<typeof userEvent.setup>, etiqueta: string) {
@@ -110,6 +115,54 @@ async function crearAtributo(
   }
   await u.click(within(d).getByRole('button', { name: 'Aceptar' }))
 }
+
+describe('Aviso de bienvenida', () => {
+  it('aparece al entrar, con las advertencias y el link al repo', () => {
+    render(<App />)
+    const aviso = screen.getByRole('region', { name: 'Antes de empezar' })
+
+    expect(aviso.textContent).toContain('No es la herramienta oficial de la cátedra')
+    expect(aviso.textContent).toContain('No abre los archivos del CasER original')
+    expect(aviso.textContent).toContain('Dos reglas difieren del original')
+    expect(aviso.textContent).toContain('Escrita con ayuda de IA')
+    expect(within(aviso).getByRole('link', { name: /repositorio/i })).toHaveAttribute(
+      'href',
+      'https://github.com/salvaKaraka/rombo',
+    )
+  })
+
+  it('se cierra y no vuelve a aparecer al recargar', async () => {
+    const u = userEvent.setup()
+    render(<App />)
+
+    await u.click(screen.getByRole('button', { name: 'Cerrar el aviso' }))
+    expect(screen.queryByRole('region', { name: 'Antes de empezar' })).toBeNull()
+
+    // Simula una recarga: se vuelve a montar con el localStorage ya escrito.
+    cleanup()
+    render(<App />)
+    expect(screen.queryByRole('region', { name: 'Antes de empezar' })).toBeNull()
+  })
+
+  it('el botón de ayuda lo vuelve a abrir', async () => {
+    const u = userEvent.setup()
+    render(<App />)
+
+    await u.click(screen.getByRole('button', { name: 'Cerrar el aviso' }))
+    await u.click(screen.getByRole('button', { name: /Ayuda/ }))
+    expect(screen.getByRole('region', { name: 'Antes de empezar' })).toBeTruthy()
+  })
+
+  it('no bloquea el uso de la app mientras está abierto', async () => {
+    const u = userEvent.setup()
+    render(<App />)
+
+    // Sin cerrar el aviso, se puede crear una entidad.
+    await crearEntidad(u, 'persona')
+    expect(screen.getByText(/1 entidades/)).toBeTruthy()
+    expect(screen.getByRole('region', { name: 'Antes de empezar' })).toBeTruthy()
+  })
+})
 
 describe('App — recorrido completo', () => {
   it('arranca en Especificación con el modelo vacío en MCAN', () => {

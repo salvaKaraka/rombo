@@ -15,6 +15,7 @@ import { SpecEditor, type TipoObjeto } from './SpecEditor'
 import { DiagramCanvas } from './canvas/DiagramCanvas'
 import { TablesView } from './TablesView'
 import { LogView } from './LogView'
+import { AvisoInicial, avisoYaVisto, marcarAvisoVisto, REPO } from './AvisoInicial'
 import { Confirmar, Mensaje } from './dialogs/Base'
 import {
   DialogoCompuesto,
@@ -89,6 +90,7 @@ export function App() {
   /** Mensaje "Paso N: ..." que hay que confirmar antes de la peticion. */
   const [anuncio, setAnuncio] = useState<string | null>(null)
   const [tema, setTema] = useState<Tema>('auto')
+  const [mostrarAviso, setMostrarAviso] = useState(() => !avisoYaVisto())
   const svgRef = useRef<SVGSVGElement | null>(null)
 
   // Cuando llega una peticion con anuncio, primero se muestra el anuncio.
@@ -614,8 +616,15 @@ export function App() {
     )
   }
 
+  const cerrarAviso = useCallback(() => {
+    marcarAvisoVisto()
+    setMostrarAviso(false)
+  }, [])
+
   return (
     <div className="app">
+      {mostrarAviso ? <AvisoInicial onCerrar={cerrarAviso} /> : <div hidden />}
+
       <header className="cabecera">
         <div className="marca">
           <i aria-hidden>◇</i>
@@ -626,6 +635,23 @@ export function App() {
           {modelo.estado}
         </span>
         <div className="crece" />
+        <a
+          className="cab-btn"
+          href={REPO}
+          target="_blank"
+          rel="noreferrer"
+          title="Código fuente en GitHub"
+        >
+          <span aria-hidden>◴</span> Repositorio
+        </a>
+        <button
+          type="button"
+          className="cab-btn"
+          onClick={() => setMostrarAviso(true)}
+          title="Ver de nuevo el aviso: en qué se diferencia del CasER original"
+        >
+          <span aria-hidden>?</span> Ayuda
+        </button>
         <select
           value={tema}
           onChange={(e) => setTema(e.target.value as Tema)}
