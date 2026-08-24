@@ -47,5 +47,5 @@ body:
     attributes:
       label: Modelo con el que se reproduce
       description: >
-        Pegá acá el contenido del `.caser.json` (botón Guardar), o adjuntá el
+        Pegá acá el contenido del `.rombo.json` (botón Guardar), o adjuntá el
         archivo arrastrándolo. Es lo que hace el problema reproducible.

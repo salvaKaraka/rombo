@@ -819,7 +819,7 @@ export function DialogoRelacion({
       <Dialogo
         ancho
         titulo={existente ? `Relación ${existente.nombre}` : 'Nueva relación'}
-        mensaje="Indique el nombre, las entidades relacionadas y su cardinalidad. CasER permite hasta relaciones ternarias."
+        mensaje="Indique el nombre, las entidades relacionadas y su cardinalidad. Se contemplan hasta relaciones ternarias."
         onAceptar={guardar}
         aceptarHabilitado={!!nombre.trim() && completas}
         onCancelar={onCerrar}

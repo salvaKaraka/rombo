@@ -1,9 +1,9 @@
 {
-  "name": "caser-web",
+  "name": "rombo",
   "private": true,
-  "version": "2.0.0",
+  "version": "1.0.0",
   "type": "module",
-  "description": "CasER 2.0 — herramienta de modelado de bases de datos (conceptual, logico, fisico). Reimplementacion web local.",
+  "description": "Modelado de bases de datos: del enunciado al esquema fisico, paso a paso. Reimplementacion web de CasER 2.0 (UNLP).",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

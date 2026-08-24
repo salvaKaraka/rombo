@@ -1,5 +1,5 @@
 /**
- * Formato nativo: JSON legible, extension `.caser.json`.
+ * Formato nativo: JSON legible, extension `.rombo.json`.
  */
 
 import type { Documento, Escritor, Lector } from './types'
@@ -8,7 +8,7 @@ import { modeloVacio, pipelineInicial } from '../domain/types'
 export const VERSION_FORMATO = 1
 
 export const lectorJson: Lector = {
-  nombre: 'Modelo CasER (JSON)',
+  nombre: 'Modelo rombo (JSON)',
   extensiones: ['.json'],
 
   reconoce(bytes, nombreArchivo) {
@@ -30,8 +30,8 @@ export const lectorJson: Lector = {
 }
 
 export const escritorJson: Escritor = {
-  nombre: 'Modelo CasER (JSON)',
-  extension: '.caser.json',
+  nombre: 'Modelo rombo (JSON)',
+  extension: '.rombo.json',
 
   escribir(doc) {
     const salida: Documento = { ...doc, version: VERSION_FORMATO }
@@ -47,7 +47,7 @@ export const escritorJson: Escritor = {
  */
 function normalizar(crudo: unknown): Documento {
   if (typeof crudo !== 'object' || crudo === null) {
-    throw new Error('El archivo no tiene la forma de un modelo de CasER.')
+    throw new Error('El archivo no tiene la forma de un modelo de rombo.')
   }
   const d = crudo as Partial<Documento>
   if (!d.modelo || typeof d.modelo !== 'object') {
@@ -100,7 +100,7 @@ export function leerDocumento(bytes: Uint8Array, nombreArchivo: string): Documen
   const lector = LECTORES.find((l) => l.reconoce(bytes, nombreArchivo))
   if (!lector) {
     throw new Error(
-      'Formato no reconocido. Esta versión abre modelos guardados por esta misma app (.caser.json).',
+      'Formato no reconocido. Esta versión abre modelos guardados por esta misma app (.rombo.json).',
     )
   }
   return lector.leer(bytes)

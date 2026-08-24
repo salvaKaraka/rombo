@@ -103,5 +103,5 @@ Si querés aportar y no sabés en qué, esto es lo que falta:
 ## Reportar un problema
 
 Abrí un issue. Si es un bug del modelado, lo más útil que podés adjuntar es el
-**modelo guardado** (Guardar te baja un `.caser.json`) junto con qué esperabas y
+**modelo guardado** (Guardar te baja un `.rombo.json`) junto con qué esperabas y
 qué pasó.

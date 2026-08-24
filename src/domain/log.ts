@@ -127,7 +127,7 @@ export function bitacoraHtml(b: Bitacora): string {
 
   return `<!doctype html>
 <html lang="es"><head><meta charset="utf-8">
-<title>Log CasER 2.0</title>
+<title>rombo — log del pasaje</title>
 <style>
   :root { color-scheme: light dark; }
   body { font-family: ui-serif, Georgia, "Times New Roman", serif; max-width: 60rem;
@@ -153,7 +153,7 @@ export function bitacoraHtml(b: Bitacora): string {
   }
 </style></head>
 <body>
-  <header><h1>CasER 2.0 &mdash; Log de pasaje</h1></header>
+  <header><h1>rombo &mdash; log del pasaje</h1></header>
   <p class="meta">${escapar(b.fecha)} &nbsp;&middot;&nbsp; ${escapar(b.hora)}</p>
   ${seccion('logico', 'Pasaje a Modelo Lógico', '◈')}
   ${seccion('fisico', 'Pasaje a Modelo Físico', '▤')}

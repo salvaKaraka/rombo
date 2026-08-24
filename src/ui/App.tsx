@@ -618,8 +618,9 @@ export function App() {
     <div className="app">
       <header className="cabecera">
         <div className="marca">
-          <b>CasER</b>
-          <span>2.0</span>
+          <i aria-hidden>◇</i>
+          <b>rombo</b>
+          <span>modelado de datos</span>
         </div>
         <span className="estado-chip" title="Estado del modelo">
           {modelo.estado}
@@ -697,7 +698,9 @@ export function App() {
         )}
         {modelo.tablas.length > 0 && <span>{modelo.tablas.length} tablas</span>}
         <div className="crece" />
-        <span>Fac. de Informática · UNLP — Introducción a las Bases de Datos</span>
+        <span title="Este proyecto no es la herramienta oficial de la cátedra.">
+          Reimplementación de CasER · Introducción a las Bases de Datos, UNLP
+        </span>
       </footer>
 
       {/* Anuncio "Paso N: ..." previo a la peticion */}

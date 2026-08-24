@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CasER 2.0 — hoja de estilos unica.
+   rombo — hoja de estilos unica.
    Herramienta densa: prioriza legibilidad y cantidad de informacion visible
    por encima del aire. Acento heredado de los violetas del log original
    (#4501CC / #6E0CB8).
@@ -172,15 +172,23 @@ textarea {
   white-space: nowrap;
 }
 
+.marca i {
+  color: var(--acento);
+  font-style: normal;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
 .marca b {
   color: var(--acento);
   font-size: 1.05rem;
+  letter-spacing: -0.015em;
 }
 
 .marca span {
   color: var(--texto-3);
   font-size: 0.72rem;
-  font-variant-numeric: tabular-nums;
+  font-weight: 400;
 }
 
 .estado-chip {

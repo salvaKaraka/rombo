@@ -4,6 +4,7 @@ dist/
 
 # Modelos guardados desde la app
 *.caser.json
+*.rombo.json
 
 .DS_Store
 .vscode/

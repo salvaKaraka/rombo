@@ -32,7 +32,7 @@ body:
     id: modelo
     attributes:
       label: Modelo con el que pasa
-      description: Contenido del `.caser.json`, o el archivo adjunto. Opcional pero ayuda mucho.
+      description: Contenido del `.rombo.json`, o el archivo adjunto. Opcional pero ayuda mucho.
 
   - type: input
     id: entorno

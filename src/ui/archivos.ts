@@ -167,7 +167,7 @@ export function imprimirDiagrama(svg: SVGSVGElement): boolean {
   const w = window.open('', '_blank', 'width=1000,height=760')
   if (!w) return false
   w.document.write(
-    `<!doctype html><html><head><meta charset="utf-8"><title>CasER — diagrama</title>` +
+    `<!doctype html><html><head><meta charset="utf-8"><title>rombo — diagrama</title>` +
       `<style>@page{margin:12mm}body{margin:0}svg{max-width:100%;height:auto}</style>` +
       `</head><body>${svgAutocontenido(svg)}</body></html>`,
   )
