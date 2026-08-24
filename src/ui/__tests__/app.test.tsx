@@ -8,6 +8,7 @@ import { describe, expect, it, beforeEach } from 'vitest'
 import { render, screen, within, cleanup, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { App } from '../App'
+import { marcarAvisoVisto } from '../AvisoInicial'
 
 beforeEach(() => {
   cleanup()
@@ -119,7 +120,7 @@ async function crearAtributo(
 describe('Aviso de bienvenida', () => {
   it('aparece al entrar, con las advertencias y el link al repo', () => {
     render(<App />)
-    const aviso = screen.getByRole('region', { name: 'Antes de empezar' })
+    const aviso = screen.getByRole('dialog', { name: 'Antes de empezar' })
 
     expect(aviso.textContent).toContain('No es la herramienta oficial de la cátedra')
     expect(aviso.textContent).toContain('No abre los archivos del CasER original')
@@ -135,36 +136,47 @@ describe('Aviso de bienvenida', () => {
     const u = userEvent.setup()
     render(<App />)
 
-    await u.click(screen.getByRole('button', { name: 'Cerrar el aviso' }))
-    expect(screen.queryByRole('region', { name: 'Antes de empezar' })).toBeNull()
+    await u.click(screen.getByRole('button', { name: 'Entendido' }))
+    expect(screen.queryByRole('dialog', { name: 'Antes de empezar' })).toBeNull()
 
     // Simula una recarga: se vuelve a montar con el localStorage ya escrito.
     cleanup()
     render(<App />)
-    expect(screen.queryByRole('region', { name: 'Antes de empezar' })).toBeNull()
+    expect(screen.queryByRole('dialog', { name: 'Antes de empezar' })).toBeNull()
   })
 
   it('el botón de ayuda lo vuelve a abrir', async () => {
     const u = userEvent.setup()
     render(<App />)
 
-    await u.click(screen.getByRole('button', { name: 'Cerrar el aviso' }))
+    await u.click(screen.getByRole('button', { name: 'Entendido' }))
     await u.click(screen.getByRole('button', { name: /Ayuda/ }))
-    expect(screen.getByRole('region', { name: 'Antes de empezar' })).toBeTruthy()
+    expect(screen.getByRole('dialog', { name: 'Antes de empezar' })).toBeTruthy()
   })
 
-  it('no bloquea el uso de la app mientras está abierto', async () => {
+  it('se cierra con Escape', async () => {
     const u = userEvent.setup()
     render(<App />)
 
-    // Sin cerrar el aviso, se puede crear una entidad.
+    await u.keyboard('{Escape}')
+    expect(screen.queryByRole('dialog', { name: 'Antes de empezar' })).toBeNull()
+  })
+
+  it('cerrarlo deja la app usable', async () => {
+    const u = userEvent.setup()
+    render(<App />)
+
+    await u.click(screen.getByRole('button', { name: 'Entendido' }))
     await crearEntidad(u, 'persona')
     expect(screen.getByText(/1 entidades/)).toBeTruthy()
-    expect(screen.getByRole('region', { name: 'Antes de empezar' })).toBeTruthy()
   })
 })
 
 describe('App — recorrido completo', () => {
+  // El aviso de bienvenida es un modal: si queda abierto, `getByRole('dialog')`
+  // encuentra dos y las consultas de estos tests se vuelven ambiguas.
+  beforeEach(() => marcarAvisoVisto())
+
   it('arranca en Especificación con el modelo vacío en MCAN', () => {
     render(<App />)
     expect(screen.getByTitle('Estado del modelo')).toHaveTextContent('MCAN')

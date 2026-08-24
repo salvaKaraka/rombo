@@ -623,8 +623,6 @@ export function App() {
 
   return (
     <div className="app">
-      {mostrarAviso ? <AvisoInicial onCerrar={cerrarAviso} /> : <div hidden />}
-
       <header className="cabecera">
         <div className="marca">
           <i aria-hidden>◇</i>
@@ -859,6 +857,10 @@ export function App() {
           onCerrar={() => setDialogo(null)}
         />
       )}
+
+      {/* Modal, fuera del grid: como fila del layout desplazaba el `1fr` del
+          cuerpo y al cerrarse la página quedaba compactada. */}
+      {mostrarAviso && <AvisoInicial onCerrar={cerrarAviso} />}
 
       {avisos.length > 0 && (
         <div className="avisos">

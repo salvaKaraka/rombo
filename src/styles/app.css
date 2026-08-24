@@ -129,169 +129,70 @@ textarea {
 
 .app {
   display: grid;
-  /* aviso · cabecera · toolbar · cuerpo · pie */
-  grid-template-rows: auto auto auto 1fr auto;
+  /* cabecera · toolbar · cuerpo · pie */
+  grid-template-rows: auto auto 1fr auto;
   height: 100%;
   min-height: 0;
 }
 
-/* ------------------------------------------------------------- aviso inicial */
+/* -------------------------------------------------- aviso inicial (contenido) */
+/* La caja la aporta `.dlg`: acá va sólo el contenido de la lista. */
 
-.aviso-inicial {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.25rem;
-  padding: 0.9rem 1.1rem;
-  background: var(--acento-suave);
-  border-bottom: 1px solid color-mix(in srgb, var(--acento) 28%, transparent);
-  box-shadow: inset 0 3px 0 var(--acento);
-  /* Sin recorte: con una altura máxima el texto quedaba cortado a mitad de
-     renglón y parecía un error de maquetación. En dos columnas entra entero. */
-  max-height: none;
-}
-
-.aviso-inicial-cuerpo {
-  flex: 1;
-  min-width: 0;
-}
-
-.aviso-inicial h2 {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin: 0 0 0.5rem;
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--acento-texto);
-  letter-spacing: -0.005em;
-}
-
-.aviso-inicial h2 i {
-  font-style: normal;
-  color: var(--acento);
-}
-
-.aviso-inicial ul {
+.aviso-lista {
   margin: 0;
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 0.35rem;
-  grid-template-columns: 1fr;
+  gap: 0.6rem;
 }
 
-/* Exactamente dos columnas en pantalla ancha: cuatro viñetas quedan 2×2. Con
-   `auto-fit` salían tres y la cuarta caía sola, con un hueco al lado. */
-@media (min-width: 860px) {
-  .aviso-inicial ul {
-    grid-template-columns: 1fr 1fr;
-    column-gap: 2rem;
-  }
-}
-
-.aviso-inicial li {
+.aviso-lista li {
   position: relative;
-  padding-left: 0.85rem;
-  font-size: 0.79rem;
-  line-height: 1.5;
+  padding-left: 0.95rem;
+  font-size: 0.83rem;
+  line-height: 1.55;
   color: var(--texto-2);
 }
 
-.aviso-inicial li::before {
-  content: '·';
+.aviso-lista li::before {
+  content: '\25C7';
   position: absolute;
-  left: 0.15rem;
+  left: 0;
+  top: 0.03rem;
+  font-size: 0.72rem;
   color: var(--acento);
-  font-weight: 700;
 }
 
-.aviso-inicial li strong {
+.aviso-lista li strong {
   color: var(--texto);
   font-weight: 650;
 }
 
-.aviso-inicial .ext {
+.aviso-lista .ext {
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--acento-texto);
   white-space: nowrap;
 }
 
-.aviso-inicial-pie {
-  margin: 0.65rem 0 0;
-  padding-top: 0.55rem;
-  border-top: 1px solid color-mix(in srgb, var(--acento) 20%, transparent);
-  font-size: 0.76rem;
+.aviso-pie {
+  margin: 1rem 0 0;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--borde);
+  font-size: 0.78rem;
   color: var(--texto-3);
+  line-height: 1.55;
 }
 
-.aviso-inicial a {
+.aviso-pie a {
   color: var(--acento-texto);
   font-weight: 600;
   text-decoration: none;
   border-bottom: 1px solid color-mix(in srgb, var(--acento) 45%, transparent);
 }
 
-.aviso-inicial a:hover {
+.aviso-pie a:hover {
   border-bottom-color: var(--acento);
-}
-
-.aviso-inicial-cerrar {
-  flex: none;
-  align-self: center;
-  padding: 0.4rem 0.9rem;
-  border: 1px solid var(--acento);
-  border-radius: 6px;
-  background: var(--acento);
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-:root[data-theme='dark'] .aviso-inicial-cerrar {
-  color: #17171c;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .aviso-inicial-cerrar {
-    color: #17171c;
-  }
-}
-
-.aviso-inicial-cerrar:hover {
-  filter: brightness(1.08);
-}
-
-@media (max-width: 720px) {
-  .aviso-inicial {
-    flex-direction: column;
-    gap: 0.7rem;
-  }
-
-  .aviso-inicial-cerrar {
-    align-self: stretch;
-  }
-}
-
-.cuerpo {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  min-height: 0;
-}
-
-.cuerpo.sin-arbol {
-  grid-template-columns: 1fr;
-}
-
-.principal {
-  min-width: 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  background: var(--panel);
-  border-left: 1px solid var(--borde);
 }
 
 /* ----------------------------------------------------------------- cabecera */
