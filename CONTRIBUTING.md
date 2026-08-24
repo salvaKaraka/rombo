@@ -91,11 +91,14 @@ que hay alrededor y listo.
 
 Si querés aportar y no sabés en qué, esto es lo que falta:
 
-- **Leer los archivos del CasER original.** Hoy sólo abrimos nuestro JSON. El
-  formato original es serialización Java (header `AC ED 00 05`). La persistencia
-  ya está detrás de una interfaz `Lector` en `src/persistence/types.ts`, así que
-  es implementarla y registrarla en `LECTORES`. Es el aporte de mayor impacto
-  para quien tenga trabajos hechos en la app vieja.
+- **Leer los archivos del CasER original** (`.csr`, `.cdf`, `.cml`). Hoy sólo
+  abrimos nuestro JSON, así que quien tenga trabajos hechos en la app de Windows
+  no los puede traer. El formato es serialización Java (header `AC ED 00 05`);
+  el objeto raíz es `DocumentoConceptual`, que envuelve el `Diagrama` y el texto
+  de la especificación — ver `editors/util/LoadSaveUtils.java` en el fuente
+  original. La persistencia ya está detrás de una interfaz `Lector` en
+  `src/persistence/types.ts`, así que es implementarla y registrarla en
+  `LECTORES`. Es el aporte de mayor impacto que hay pendiente.
 - **Relaciones con más de tres entidades.** El original no las contempla y acá
   tampoco, pero el modelo de datos no lo impide.
 - **Layout automático del diagrama.** Hoy los objetos nuevos caen en una grilla y

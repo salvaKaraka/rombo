@@ -8,6 +8,14 @@
 </p>
 
 <p align="center">
+  <a href="https://rombo-green.vercel.app/"><strong>▸ Abrir la app</strong></a>
+  &nbsp;·&nbsp;
+  <a href="#cómo-se-usa">Correrla local</a>
+  &nbsp;·&nbsp;
+  <a href="CONTRIBUTING.md">Cómo aportar</a>
+</p>
+
+<p align="center">
   <img src="docs/app.png" alt="La aplicación con la pestaña Especificación abierta" width="100%">
 </p>
 
@@ -176,10 +184,27 @@ como lo haría una persona.
 
 ## Formato de archivo
 
-Se guarda en JSON legible. El formato del CasER original es serialización Java
-(header `AC ED 00 05`), que no se lee todavía: la persistencia está detrás de una
-interfaz `Lector` en `src/persistence/types.ts`, así que sumar ese importador es
-agregar una implementación y registrarla en `LECTORES`.
+Se guarda en JSON legible (`.rombo.json`), un archivo por modelo, en tu máquina.
+
+> [!IMPORTANT]
+> **No abre los archivos del CasER original.** Si tenés trabajos guardados con la
+> app de Windows, hoy no se pueden importar acá: hay que rearmarlos.
+
+El original guarda con serialización Java (header `AC ED 00 05`) y usa una
+extensión distinta según el estado del modelo:
+
+| Extensión | Estado del modelo |
+|---|---|
+| `.csr` | conceptual en construcción |
+| `.cdf` | conceptual finalizado, después de *Finalizar* |
+| `.cml` | modelo lógico |
+| `.cmf` | físico — declarada en el código, pero el camino que la usa está comentado |
+
+No está implementado simplemente porque no lo necesité: empecé de cero. Si a
+alguien le sirve, es un aporte bienvenido y no arranca de la nada — la
+persistencia ya está detrás de una interfaz `Lector` en
+`src/persistence/types.ts`, así que es escribir esa implementación y registrarla
+en `LECTORES`. Si lo necesitás y no querés meterte, abrí un issue y lo miro.
 
 ## Dónde me aparté del original
 
